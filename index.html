@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mamá Claudia - La Mejor Mamá del Mundo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #fff5f0 0%, #ffe8e0 50%, #ffd9cc 100%);
+            color: #5d4037;
+            overflow-x: hidden;
+        }
+
+        .butterfly-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .butterfly {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0.7;
+            animation: fly 20s infinite ease-in-out;
+        }
+
+        @keyframes fly {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translate(100vw, -100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .music-control {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            font-size: 30px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .music-control:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(255, 107, 157, 0.6);
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 5em;
+            color: #e91e63;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(233, 30, 99, 0.3);
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero .subtitle {
+            font-size: 2em;
+            color: #c2185b;
+            font-weight: 600;
+            margin-bottom: 30px;
+            animation: fadeIn 2s ease-in 1s both;
+        }
+
+        .hero .flowers {
+            font-size: 4em;
+            margin: 30px 0;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 60px 40px;
+            margin: 60px 0;
+            box-shadow: 0 15px 50px rgba(233, 30, 99, 0.2);
+            border: 3px solid rgba(233, 30, 99, 0.3);
+        }
+
+        .section-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 3em;
+            color: #e91e63;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '💕';
+            display: block;
+            font-size: 1.5em;
+            margin-top: 15px;
+        }
+
+        .text-content {
+            font-size: 1.4em;
+            line-height: 2;
+            color: #5d4037;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .text-content.big {
+            font-size: 1.7em;
+            color: #c2185b;
+            font-weight: 600;
+            margin: 50px 0;
+        }
+
+        .children-section {
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe4ec 100%);
+            border-left: 6px solid #e91e63;
+        }
+
+        .child-card {
+            background: white;
+            border-radius: 25px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .child-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(233, 30, 99, 0.2);
+        }
+
+        .child-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .child-photo {
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(135deg, #ffb3d9 0%, #ff80ab 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5em;
+            box-shadow: 0 8px 25px rgba(233, 30, 99, 0.3);
+            border: 5px solid white;
+        }
+
+        .child-info h3 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5em;
+            color: #e91e63;
+            margin-bottom: 10px;
+        }
+
+        .child-info .role {
+            font-size: 1.3em;
+            color: #c2185b;
+            font-weight: 600;
+        }
+
+        .child-message {
+            font-size: 1.35em;
+            line-height: 1.9;
+            color: #5d4037;
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 240, 245, 0.5);
+            border-radius: 15px;
+            border-left: 4px solid #e91e63;
+            font-style: italic;
+        }
+
+        .qualities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .quality-card {
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe4ec 100%);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid rgba(233, 30, 99, 0.2);
+        }
+
+        .quality-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(233, 30, 99, 0.3);
+        }
+
+        .quality-card .icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .quality-card h3 {
+            font-size: 1.6em;
+            color: #e91e63;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .quality-card p {
+            font-size: 1.2em;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+
+        .memories-section {
+            background: linear-gradient(135deg, #e1f5fe 0%, #b3e5fc 100%);
+            border-left: 6px solid #0288d1;
+        }
+
+        .memory-box {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            margin: 30px 0;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .memory-box h3 {
+            font-size: 2em;
+            color: #0288d1;
+            margin-bottom: 20px;
+            font-family: 'Pacifico', cursive;
+            text-align: center;
+        }
+
+        .memory-box p {
+            font-size: 1.35em;
+            line-height: 1.9;
+            color: #5d4037;
+            text-align: center;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            max-width: 450px;
+            height: 320px;
+            background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+            border-radius: 20px;
+            margin: 30px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6em;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 6px solid white;
+        }
+
+        .memory-box img {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            border-radius: 20px;
+            margin: 30px auto;
+            display: block;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 6px solid white;
+            object-fit: cover;
+        }
+
+        .child-header img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 8px 25px rgba(233, 30, 99, 0.3);
+            border: 5px solid white;
+        }
+
+        .dedication-section {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff3cc 100%);
+            border-left: 6px solid #ffa726;
+        }
+
+        .granddaughter-section {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+            border-left: 6px solid #ec407a;
+        }
+
+        .granddaughter-section .section-title::after {
+            content: '👶💕';
+        }
+
+        .final-message {
+            background: linear-gradient(135deg, #ffccbc 0%, #ffab91 100%);
+            padding: 80px 40px;
+            text-align: center;
+            border-radius: 30px;
+            margin: 60px 0;
+            border: 4px solid #e91e63;
+        }
+
+        .final-message h2 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3.5em;
+            color: #bf360c;
+            margin-bottom: 30px;
+        }
+
+        .final-message p {
+            font-size: 1.6em;
+            color: #5d4037;
+            line-height: 2;
+            margin: 20px 0;
+        }
+
+        .hearts {
+            font-size: 3em;
+            margin: 30px 0;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3em; }
+            .hero .subtitle { font-size: 1.5em; }
+            .section-title { font-size: 2.2em; }
+            .section { padding: 40px 25px; }
+            .text-content { font-size: 1.2em; }
+            .text-content.big { font-size: 1.4em; }
+            .child-header { flex-direction: column; }
+            .child-photo { width: 150px; height: 150px; font-size: 4em; }
+            .child-header img { width: 150px; height: 150px; }
+            .music-control { width: 60px; height: 60px; font-size: 25px; bottom: 20px; right: 20px; }
+        }
+    </style>
+</head>
+<body>
+<div class="butterfly-container" id="butterflies"></div>
+
+
+<button class="music-control" id="musicBtn" onclick="toggleMusic()">🎵</button>
+<audio id="backgroundMusic" loop>
+    <source src="fotos/eres.mp3" type="audio/mpeg">
+</audio>
+
+<div class="content">
+    <section class="hero">
+        <h1>¡Feliz Día Mamá!</h1>
+        <div class="flowers">🌸 💐 🌺 🌹 🌸</div>
+        <div class="subtitle">Para Claudia, nuestro corazón y nuestra fortaleza</div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Mamá, Sos Nuestro Todo</h2>
+        <div class="text-content">
+            No hay palabras suficientes para describir lo que significás para nosotros.<br>
+            Sos la luz que guía nuestro camino, el abrazo que cura todo,<br>
+            la sonrisa que hace que cualquier problema parezca pequeño.
+        </div>
+        <div class="text-content big">
+            Trabajás sin parar, das todo de vos cada día,<br>
+            y aún así, SIEMPRE estás ahí cuando te necesitamos.<br>
+            Eso te hace extraordinaria. 💖
+        </div>
+    </section>
+
+    <section class="section children-section">
+        <h2 class="section-title">Tus 3 Hijos Te Decimos...</h2>
+
+        <div class="child-card">
+            <div class="child-header">
+                <img src="fotos/lichi.jpeg" alt="lichi">
+                <div class="child-info">
+                    <h3>Tu Hijo Mayor</h3>
+                    <div class="role">El primero en robarte el corazón</div>
+                </div>
+            </div>
+            <div class="child-message">
+                "Mamá, gracias por enseñarme lo que significa amar sin condiciones. Desde que tengo memoria, siempre has estado ahí, en las buenas y malas, en cada momento importante. Me enseñaste a ser fuerte, a trabajar duro como vos, Sos mi ejemplo de perseverancia. Te admiro más de lo que las palabras pueden expresar. Gracias por hacer de mí el hombre que soy hoy. Te amo con todo mi corazón, mamá. 💙"
+            </div>
+        </div>
+
+        <div class="child-card">
+            <div class="child-header">
+                <img src="fotos/pia.jpeg" alt="pia">
+                <div class="child-info">
+                    <h3>Tu Hija del Medio</h3>
+                    <div class="role">Tu compañera de confidencias</div>
+                </div>
+            </div>
+            <div class="child-message">
+                "Mami linda, sos mi heroína favorita. No hay princesa de cuento que se compare con vos. Me enseñaste que una mujer puede ser fuerte y tierna al mismo tiempo, que puede trabajar incansablemente y aún así tener tiempo para abrazar a sus hijos. Cada día aprendo algo nuevo de vos: tu generosidad, tu forma de amar a la familia, tu capacidad de hacer que todo se sienta como en casa. Gracias por cuidarme, por escucharme, por entenderme incluso cuando no digo nada. Sos la mejor mamá del universo. Te amo infinito. 💕"
+            </div>
+        </div>
+
+        <div class="child-card">
+            <div class="child-header">
+                <img src="fotos/cande.jpeg" alt="cande">
+                <div class="child-info">
+                    <h3>Tu Hija Menor</h3>
+                    <div class="role">La bebé de mamá (siempre)</div>
+                </div>
+            </div>
+            <div class="child-message">
+                "Mamita hermosa, gracias por todo lo que haces por nosotros y sos la mejor y te amo mucho. 💗"
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Lo Que Más Amamos de Vos</h2>
+        <div class="qualities-grid">
+            <div class="quality-card">
+                <span class="icon">💝</span>
+                <h3>Tu Amor de Madre</h3>
+                <p>Tu amor no tiene límites. Nos cuidas, nos proteges, nos mimas. Cada abrazo tuyo es un refugio seguro donde todo está bien.</p>
+            </div>
+
+            <div class="quality-card">
+                <span class="icon">🏠</span>
+                <h3>Tu Dedicación al Hogar</h3>
+                <p>Convertís cualquier lugar en un hogar. Tu amor por la casa de Nono y tus recuerdos de Siquiman nos enseñan que el hogar está donde está la familia.</p>
+            </div>
+
+            <div class="quality-card">
+                <span class="icon">💪</span>
+                <h3>Tu Fortaleza Inquebrantable</h3>
+                <p>Trabajás sin descanso, das todo cada día y nunca te rendís. Sos nuestra guerrera, nuestra inspiración de que todo es posible con esfuerzo.</p>
+            </div>
+
+            <div class="quality-card">
+                <span class="icon">👨‍👩‍👧‍👦</span>
+                <h3>Tu Espíritu Familiar</h3>
+                <p>La familia es tu tesoro más grande. Te encanta reunir a todos, crear momentos especiales. Sos el corazón que mantiene unida a esta hermosa familia.</p>
+            </div>
+
+            <div class="quality-card">
+                <span class="icon">😊</span>
+                <h3>Tu Alegría Contagiosa</h3>
+                <p>Tu sonrisa ilumina todo. Incluso en los días difíciles, encontrás la forma de hacernos reír y ver el lado positivo de las cosas.</p>
+            </div>
+
+            <div class="quality-card">
+                <span class="icon">🤗</span>
+                <h3>Tu Presencia Constante</h3>
+                <p>Aunque estés ocupada, siempre, SIEMPRE hacés tiempo para nosotros. Estás en cada momento importante. Esa presencia es tu regalo más valioso.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section granddaughter-section">
+
+        <h2 class="section-title">
+
+            ¡Vas a Ser Abuela!</h2>
+
+        <div class="text-content big">
+
+            Una nueva bendición viene en camino... 👶
+        </div>
+        <img src="fotos/emma.jpeg" alt="emma">
+        <div class="text-content">
+
+            Mamá, tu corazón está por crecer aún más.<br>
+            Pronto vas a conocer a tu primera nieta,<br>
+            y sabemos que vas a ser la abuela más amorosa del mundo.<br><br>
+
+            <strong>Porque si sos increíble como mamá,<br>
+                como abuela vas a ser MÁGICA. ✨</strong><br><br>
+
+            Esa bebita va a tener la suerte de crecer<br>
+            rodeada de tu amor, tus cuidados, tus abrazos,<br>
+            tus historias, tu ternura infinita.<br><br>
+
+            Va a conocer a esa abuela que siempre está presente,<br>
+            que trabaja sin parar pero nunca deja de lado a su familia,<br>
+            que convierte cada momento en un recuerdo hermoso.<br><br>
+        </div>
+        <div class="text-content big">
+            Tu legado de amor continúa, mamá.<br>
+            Y estamos felices de compartir esta nueva aventura con vos. 💕
+        </div>
+        <div class="hearts">👶 💗 👵 💕 👨‍👩‍👧‍👦</div>
+    </section>
+
+    <section class="section dedication-section">
+        <h2 class="section-title">Tu Equilibrio Mágico</h2>
+        <div class="text-content big">
+            Mamá, ¿cómo hacés?
+        </div>
+        <div class="text-content">
+            Trabajás todo el día. Tus manos nunca descansan.<br>
+            Tu mente siempre está ocupada resolviendo mil cosas a la vez.<br>
+            Das todo de vos en el trabajo, en la casa, con la familia.<br><br>
+
+            Y sin embargo...<br><br>
+
+            <strong>Nunca, NUNCA nos descuidás.</strong><br><br>
+
+            Estás en nuestras alegrías y en nuestras tristezas.<br>
+            Celebrás nuestros logros como si fueran tuyos.<br>
+            Nos abrazás cuando el mundo parece difícil.<br>
+            Nos escuchás con atención, sin importar qué tan cansada estés.<br>
+            Nos cuidás, nos proteges, nos guías.<br><br>
+
+            Ese superpoder de estar en todos lados,<br>
+            esa capacidad de multiplicarte y dar amor infinito,<br>
+            esa magia de hacernos sentir que somos lo más importante...<br>
+        </div>
+        <div class="text-content big">
+            Eso es lo que te hace ÚNICA.<br>
+            Eso es lo que te hace la MEJOR MAMÁ del mundo. 🌟
+        </div>
+    </section>
+
+    <section class="section memories-section">
+        <h2 class="section-title">Lugares Que Guardás en Tu Corazón</h2>
+
+        <div class="memory-box">
+            <h3>🏡 Tu Casa en Nono</h3>
+
+            <img src="fotos/nono2.jpeg" alt="nono">
+            <p>
+                Tu refugio sagrado, tu pedacito de cielo. Ahí es donde más feliz te vemos. Entre las sierras, con la familia reunida, disfrutando de la naturaleza y la paz que tanto te merecés. Cada rincón de esa casa guarda risas, asados familiares, charlas hasta la madrugada y los mejores recuerdos. Es tu lugar para recargar energías y para recordarnos lo importante que es estar juntos.
+            </p>
+        </div>
+
+        <div class="memory-box">
+            <h3>💙 La Casa de Siquiman</h3>
+            <img src="fotos/siquiman2.jpeg" alt="siquiman">
+            <p>
+                Aunque ya no esté físicamente con nosotros, sabemos que vive eternamente en tu corazón y en el nuestro. Esa casa fue testigo de tantos momentos hermosos, de veranos inolvidables, de risas que aún resuenan en nuestra memoria. Los edificios pueden desaparecer, mamá, pero los recuerdos que creaste ahí son para siempre. Gracias por darnos esos momentos mágicos que nunca vamos a olvidar.
+            </p>
+        </div>
+
+        <div class="memory-box">
+            <h3>👨‍👩‍👧‍👦 Nosotros, Tus 3 Hijos</h3>
+            <img src="fotos/los3.jpeg" alt="lostres">
+            <p>
+                Somos tu mayor orgullo, tu razón de ser, tu motor cada día. Nos criaste con amor, paciencia y dedicación. Nos enseñaste valores que llevaremos siempre con nosotros. Aunque ya no seamos tan pequeños, siempre seremos tus bebés. Y vos siempre serás nuestra mamá adorada, nuestro ejemplo, nuestra guía. Gracias por cada sacrificio, por cada noche sin dormir, por cada preocupación, por cada abrazo. Todo lo que somos hoy, te lo debemos a vos.
+            </p>
+        </div>
+    </section>
+
+    <section class="final-message">
+        <h2>Te Amamos, Mamá</h2>
+        <div class="hearts">💖 💕 💗 💝 💓 💖</div>
+        <p>
+            Gracias por tu amor incondicional que nunca falla.<br>
+            Gracias por trabajar tanto y aún así estar siempre presente.<br>
+            Gracias por tus abrazos que curan cualquier dolor.<br>
+            Gracias por tu sonrisa que ilumina nuestros días.<br>
+        </p>
+        <p>
+            Gracias por hacer de nuestro hogar el lugar más feliz del mundo.<br>
+            Gracias por enseñarnos lo que significa amar de verdad.<br>
+            Gracias por ser nuestra fortaleza cuando nos sentimos débiles.<br>
+            Gracias por ser VOS, simplemente VOS.<br>
+        </p>
+        <div class="hearts">🌸 💐 🌺 🌹 🌸</div>
+        <p style="font-size: 2.2em; font-family: 'Pacifico', cursive; color: #bf360c; margin-top: 40px;">
+            ¡FELIZ DÍA DE LA MADRE!
+        </p>
+        <p style="font-size: 1.4em; margin-top: 25px; font-weight: 600;">
+            No hay regalo que pueda igualar todo lo que nos das.<br>
+            Pero hoy queremos que sepas que sos nuestra heroína,<br>
+            nuestro ejemplo, nuestro amor más grande.<br><br>
+            Te amamos HOY, MAÑANA y SIEMPRE. 💕
+        </p>
+        <div class="hearts" style="font-size: 2.5em; margin-top: 30px;">
+            👨👧👧❤️👩
+        </div>
+    </section>
+</div>
+
+<script>
+    const butterfliesContainer = document.getElementById('butterflies');
+    const butterflySymbols = ['🦋', '💕', '🌸'];
+
+    for (let i = 0; i < 15; i++) {
+        const butterfly = document.createElement('div');
+        butterfly.className = 'butterfly';
+        butterfly.textContent = butterflySymbols[Math.floor(Math.random() * butterflySymbols.length)];
+        butterfly.style.left = Math.random() * 100 + '%';
+        butterfly.style.top = Math.random() * 100 + '%';
+        butterfly.style.animationDuration = (Math.random() * 15 + 15) + 's';
+        butterfly.style.animationDelay = Math.random() * 10 + 's';
+        butterfliesContainer.appendChild(butterfly);
+    }
+
+    let isPlaying = false;
+    let audioStarted = false;
+    const music = document.getElementById('backgroundMusic');
+    const musicBtn = document.getElementById('musicBtn');
+
+    music.volume = 0.3;
+
+    // Función para iniciar el audio
+    function iniciarAudio() {
+        if (!audioStarted) {
+            music.play().then(() => {
+                isPlaying = true;
+                audioStarted = true;
+                musicBtn.textContent = '🎶';
+            }).catch(err => {
+                console.log('No se pudo reproducir automáticamente');
+            });
+        }
+    }
+
+    // Intentar reproducir apenas carga
+    window.addEventListener('load', iniciarAudio);
+
+    // Intentar con cualquier interacción del usuario
+    ['click', 'touchstart', 'keydown', 'scroll', 'mousemove'].forEach(evento => {
+        document.addEventListener(evento, iniciarAudio, { once: true, passive: true });
+    });
+
+    function toggleMusic() {
+        if (!audioStarted) {
+            iniciarAudio();
+            return;
+        }
+
+        if (isPlaying) {
+            music.pause();
+            musicBtn.textContent = '🎵';
+            isPlaying = false;
+        } else {
+            music.play();
+            musicBtn.textContent = '🎶';
+            isPlaying = true;
+        }
+    }
+</script>
+</body>
+</html>
